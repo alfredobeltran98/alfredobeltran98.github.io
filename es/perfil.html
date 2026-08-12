@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jesús Alfredo Beltrán de los Ríos · BI y Arquitectura de Datos</title>
+<meta name="description" content="BI y arquitectura de datos. Construyo la fuente de verdad y la capa de reporteo con la que finanzas y comercial toman decisiones.">
+<link rel="alternate" hreflang="en" href="/profile.html">
+<link rel="alternate" hreflang="es" href="/es/perfil.html">
+<meta property="og:title" content="Jesús Alfredo Beltrán de los Ríos · BI y Arquitectura de Datos">
+<meta property="og:description" content="BI y arquitectura de datos. Construyo la fuente de verdad y la capa de reporteo con la que finanzas y comercial toman decisiones.">
+<meta property="og:type" content="profile">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Serif:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --panel-bg: #14171A;
+    --panel-ink: #F2F3ED;
+    --bg: #EAECDF;
+    --surface: #FAFAF4;
+    --surface-alt: #E1E3D3;
+    --ink: #1C1F14;
+    --ink-muted: #5D6250;
+    --ink-faint: #676D55;
+    --line: #D1D6C2;
+    --covered: #263AA8;
+    --covered-bright: #6E82F5;
+    --covered-soft: #E7E9F6;
+    --opportunity: #C4351C;
+    --opportunity-soft: #FBEAE4;
+    --trend-up: #3C7A54;
+    --trend-down: #C4351C;
+    --trend-flat: #767D64;
+    --radius-card: 12px;
+    --radius-sharp: 2px;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+    --font-name: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+  }
+
+  /* scrollbar tuned to the page instead of the OS default */
+  html { scrollbar-color: #B4BAA0 var(--bg); scrollbar-width: thin; }
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb {
+    background: #B4BAA0; border-radius: 8px;
+    border: 3px solid var(--bg); background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #8E9578; background-clip: padding-box; }
+  ::-webkit-scrollbar-corner { background: var(--bg); }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 34px 32px 48px; }
+
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+    gap: 14px 28px; padding-bottom: 16px; border-bottom: 1px solid var(--line); margin-bottom: 52px;
+  }
+  .tb-id { display: flex; align-items: center; gap: 11px; }
+  .tb-avatar { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); }
+  .tb-name { font-family: var(--font-name); font-size: 15px; font-weight: 600; font-variant-ligatures: none; }
+  .topnav { display: flex; flex-wrap: wrap; gap: 22px; }
+  .topnav a {
+    font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-faint); padding-bottom: 2px; border-bottom: 1px solid transparent; transition: .15s;
+  }
+  .topnav a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  .topmeta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; font-size: 13px; }
+  .topmeta a { color: var(--ink-muted); border-bottom: 1px solid transparent; transition: .15s; }
+  .topmeta a:hover { color: var(--covered); border-bottom-color: var(--covered); }
+  .topmeta a.lang-switch {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 5px 11px; border: 1px solid var(--line); border-radius: 20px; color: var(--ink-muted);
+  }
+  .topmeta a.lang-switch:hover { border-color: var(--covered); color: var(--covered); }
+
+  .eyebrow {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--opportunity); margin: 0 0 16px;
+  }
+
+  .hero { margin-bottom: 64px; }
+  .hero h1 {
+    font-family: var(--font-name); font-weight: 600; font-variant-ligatures: none;
+    font-size: clamp(34px, 5.2vw, 58px); line-height: 1.04; letter-spacing: -0.018em; margin: 0 0 14px;
+  }
+  .tagline {
+    font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--opportunity); margin: 0 0 34px;
+  }
+  .hero-split { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; align-items: start; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+  .stat { padding: 18px 20px 20px 0; border-right: 1px solid var(--line); }
+  .stat:last-child { border-right: none; }
+  .stat:not(:first-child) { padding-left: 20px; }
+  .stat b { font-family: var(--font-mono); font-size: 27px; font-weight: 600; display: block; line-height: 1.1; }
+  .stat span { display: block; font-size: 12px; color: var(--ink-faint); line-height: 1.45; margin-top: 6px; }
+
+  .toolkit { margin-top: 26px; }
+  .toolkit-label {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink); margin: 0 0 4px; padding-bottom: 10px; border-bottom: 2px solid var(--ink);
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-family: var(--font-mono); font-size: 11.5px; padding: 6px 12px;
+    border: 1px solid var(--line); border-radius: 20px; color: var(--ink-muted); background: var(--surface);
+  }
+
+  .shifts { margin-top: 24px; }
+  .shifts-label {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink); margin: 0 0 4px; padding-bottom: 10px; border-bottom: 2px solid var(--ink);
+  }
+  .shift { padding: 13px 0; border-bottom: 1px solid var(--line); }
+  .shift:last-child { border-bottom: none; }
+  .shift-where {
+    display: block; font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.13em;
+    text-transform: uppercase; color: var(--ink); margin-bottom: 7px;
+  }
+  .shift-pair {
+    display: grid; grid-template-columns: 1fr 24px 1fr; align-items: baseline;
+    font-size: 13px; line-height: 1.5;
+  }
+  .shift-from { color: var(--ink-faint); }
+  .shift-arrow { font-family: var(--font-mono); color: var(--opportunity); text-align: center; }
+  .shift-to { color: var(--ink); font-weight: 500; }
+
+  .sidecard {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius-card); padding: 17px 19px 4px;
+  }
+  .sidecard-label {
+    font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase;
+    color: var(--ink); margin: 0 0 2px; padding-bottom: 10px; border-bottom: 2px solid var(--ink);
+  }
+  .sidecard p {
+    font-size: 12.5px; line-height: 1.55; color: var(--ink-muted);
+    padding: 11px 0; margin: 0; border-bottom: 1px solid var(--line);
+  }
+  .sidecard p:last-child { border-bottom: none; }
+  .sidecard b { color: var(--ink); font-weight: 600; }
+
+  .opento {
+    margin-top: 16px; background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius-card); padding: 17px 19px 19px;
+  }
+  .opento-label {
+    font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase;
+    color: var(--ink); margin: 0 0 2px; padding-bottom: 10px; border-bottom: 2px solid var(--ink);
+  }
+  .opento ul { list-style: none; margin: 0 0 16px; padding: 0; }
+  .opento li {
+    font-size: 12.5px; line-height: 1.5; color: var(--ink-muted);
+    padding: 10px 0; border-bottom: 1px solid var(--line);
+  }
+  .opento li:last-child { border-bottom: none; }
+  .opento-btn {
+    display: inline-block; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 10px 17px; border-radius: 20px;
+    background: var(--ink); color: var(--bg); transition: background .15s ease;
+  }
+  .opento-btn:hover { background: var(--opportunity); }
+
+  section { margin-bottom: 62px; scroll-margin-top: 24px; }
+  .sec-head { border-top: 1px solid var(--line); padding-top: 34px; margin-bottom: 30px; }
+  .sec-head h2 {
+    font-family: var(--font-name); font-weight: 600; font-variant-ligatures: none;
+    font-size: clamp(23px, 2.8vw, 30px); line-height: 1.15; letter-spacing: -0.012em; margin: 8px 0 0;
+  }
+  .sec-head .eyebrow { margin-bottom: 0; }
+
+  .cols3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 44px; }
+  .col { border-top: 2px solid var(--ink); padding-top: 16px; }
+  .col h3 {
+    font-family: var(--font-name); font-weight: 600; font-variant-ligatures: none;
+    font-size: 18px; line-height: 1.28; margin: 0 0 10px; letter-spacing: -0.008em;
+  }
+  .col p { font-size: 14px; line-height: 1.65; color: var(--ink-muted); margin: 0; }
+
+  .feature {
+    background: var(--panel-bg); color: var(--panel-ink);
+    border-radius: var(--radius-card); padding: 32px 34px; display: block; transition: transform .18s ease;
+  }
+  .feature:hover { transform: translateY(-2px); }
+  .feature-alt { margin-top: 20px; }
+  .feature-kicker {
+    font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.13em;
+    text-transform: uppercase; color: #E8A08C; display: block; margin-bottom: 12px;
+  }
+  .feature h3 {
+    font-family: var(--font-name); font-weight: 600; font-variant-ligatures: none;
+    font-size: clamp(22px, 3vw, 30px); margin: 0 0 12px; letter-spacing: -0.01em;
+  }
+  .feature p { font-size: 14.5px; line-height: 1.62; color: #C3C8B6; margin: 0 0 22px; max-width: 62ch; }
+  .feature-stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #33372B; padding-top: 18px; }
+  .feature-stat { padding: 0 24px; border-right: 1px solid #33372B; }
+  .feature-stat:first-child { padding-left: 0; }
+  .feature-stat:last-child { border-right: none; padding-right: 0; }
+  .feature-stat b { font-family: var(--font-mono); font-size: 17px; display: block; color: var(--panel-ink); }
+  .feature-stat span { font-size: 10.5px; color: #9AA08C; text-transform: uppercase; letter-spacing: 0.05em; }
+  .feature-go {
+    display: inline-block; margin-top: 20px; font-family: var(--font-mono); font-size: 12px;
+    letter-spacing: 0.06em; color: #E8A08C; border-bottom: 1px solid #7A4034; padding-bottom: 2px;
+  }
+
+  .pending { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+  .pending-card { border: 1px dashed var(--line); border-radius: var(--radius-card); padding: 24px 26px; }
+  .pending-num {
+    font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase;
+    color: var(--ink-faint); display: block; margin-bottom: 10px;
+  }
+  .pending-card h3 {
+    font-family: var(--font-name); font-weight: 600; font-variant-ligatures: none;
+    font-size: 18px; margin: 0 0 8px; color: var(--ink-muted); letter-spacing: -0.008em;
+  }
+  .pending-card p { font-size: 13.5px; line-height: 1.55; color: var(--ink-faint); margin: 0; }
+
+  .job { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid var(--line); }
+  .job:last-of-type { border-bottom: 1px solid var(--line); }
+  .job-meta { font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); line-height: 1.5; }
+  .job-meta b { display: block; color: var(--ink); font-size: 12.5px; font-weight: 600; margin-bottom: 2px; }
+  .job h3 { font-size: 16px; font-weight: 600; margin: 0 0 6px; }
+  .job p { font-size: 14px; line-height: 1.62; color: var(--ink-muted); margin: 0; max-width: 74ch; }
+
+  .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 34px 44px; }
+  .stack { border-top: 2px solid var(--ink); padding-top: 16px; }
+  .stack h3 {
+    font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase;
+    color: var(--ink); margin: 0 0 14px;
+  }
+  .stack ul { margin: 0; padding: 0; list-style: none; }
+  .stack li { padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; color: var(--ink-muted); }
+  .stack li:last-child { border-bottom: none; }
+  .stack li b { color: var(--ink); font-weight: 600; display: block; font-size: 14.5px; }
+
+  .foot { border-top: 1px solid var(--line); padding-top: 26px; display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; }
+  .foot p { margin: 0; font-size: 13.5px; color: var(--ink-muted); }
+  .foot a { color: var(--ink-muted); border-bottom: 1px solid var(--line); }
+  .foot a:hover { color: var(--covered); border-bottom-color: var(--covered); }
+  .foot a.cv-link {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 9px 16px; border: 1px solid var(--ink); border-radius: 20px; color: var(--ink);
+  }
+  .foot a.cv-link:hover { background: var(--ink); color: var(--bg); }
+
+  @media (max-width: 880px) {
+    .wrap { padding: 24px 20px 40px; }
+    .hero-split, .cols3, .cols2, .pending { grid-template-columns: 1fr; gap: 26px; }
+    .stats { grid-template-columns: 1fr; }
+    .shift-pair { grid-template-columns: 1fr; gap: 2px; }
+    .shift-arrow { text-align: left; }
+    .stat { border-right: none; border-bottom: 1px solid var(--line); padding: 14px 0; }
+    .stat:not(:first-child) { padding-left: 0; }
+    .job { grid-template-columns: 1fr; gap: 8px; }
+    .feature { padding: 24px 22px; }
+    .feature-stats { grid-template-columns: 1fr; gap: 12px; }
+    .feature-stat { padding: 0; border-right: none; }
+    .topnav { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="tb-id">
+      <img class="tb-avatar" src="/assets/avatar.jpg" alt="" width="34" height="34">
+      <span class="tb-name">Alfredo Beltr&aacute;n</span>
+    </div>
+    <nav class="topnav" aria-label="Sections">
+      <a href="/es/index.html">Resumen</a>
+      <a href="#work">Trabajo</a>
+      <a href="#experience">Experiencia</a>
+      <a href="#background">Formación</a>
+    </nav>
+    <nav class="topmeta" aria-label="Contacto">
+      <a class="lang-switch" href="/profile.html" hreflang="en" lang="en">English</a>
+      <a href="https://www.linkedin.com/in/jesusalfredobeltran/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="mailto:alfredobeltran98@hotmail.com">alfredobeltran98@hotmail.com</a>
+    </nav>
+  </div>
+
+  <header class="hero">
+    <h1>Alfredo Beltr&aacute;n</h1>
+    <p class="tagline">BI y Arquitectura de Datos &middot; M.Sc. Inteligencia Artificial</p>
+    <div class="hero-split">
+      <div>
+        <div class="stats">
+          <div class="stat"><b>7+</b><span>Años entre operaciones, comercial y analítica</span></div>
+          <div class="stat"><b>50+</b><span>Usuarios sobre el reporteo que lidero</span></div>
+          <div class="stat"><b>500+</b><span>Cuentas cubiertas por modelos que he construido</span></div>
+        </div>
+        <div class="shifts">
+          <p class="shifts-label">Lo que cambié</p>
+          <div class="shift"><span class="shift-where">Reporteo financiero</span><div class="shift-pair"><span class="shift-from">Dirección veía sus números una vez al mes</span><span class="shift-arrow">&rarr;</span><span class="shift-to">Una capa SQL gobernada y el dashboard que corre sobre ella, refrescado diario</span></div></div>
+          <div class="shift"><span class="shift-where">Planeación de demanda</span><div class="shift-pair"><span class="shift-from">Tres días de proceso manual antes de que alguien pudiera verlo</span><span class="shift-arrow">&rarr;</span><span class="shift-to">Una hora, automatizado en Python</span></div></div>
+          <div class="shift"><span class="shift-where">Ventas de campo</span><div class="shift-pair"><span class="shift-from">Los agentes adivinaban a qué cuenta llamar</span><span class="shift-arrow">&rarr;</span><span class="shift-to">Una watchlist de cuentas ordenada por gasto actual y portafolio sin vender</span></div></div>
+        </div>
+        <div class="toolkit">
+          <p class="toolkit-label">Stack y herramientas</p>
+          <div class="tags">
+            <span class="tag">Power BI</span>
+            <span class="tag">SQL</span>
+            <span class="tag">SAP / S4 HANA</span>
+            <span class="tag">Excel</span>
+            <span class="tag">Python</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">Estadística</span>
+            <span class="tag">Pruebas A/B</span>
+            <span class="tag">Visualización de datos</span>
+            <span class="tag">Power Query</span>
+            <span class="tag">DAX</span>
+            <span class="tag">Git</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <aside class="sidecard">
+          <p class="sidecard-label">En corto</p>
+          <p><b>Actualmente</b> Data Analyst en CargoSprint, a cargo del reporteo de la operación de finanzas.</p>
+          <p><b>Formación</b> Negocios internacionales, cadena de suministro, cuentas empresariales y analítica. Con suficiente profundidad técnica para construirlo y suficiente lectura de negocio para saber qué construir.</p>
+          <p><b>Estudiando</b> M.Sc. en Inteligencia Artificial en el Tec de Monterrey, 2025 a 2027.</p>
+        </aside>
+        <div class="opento">
+          <p class="opento-label">Abierto a</p>
+          <ul>
+            <li>Roles de analítica y BI, remotos o con reubicación.</li>
+            <li>Proyectos de consultoría en analítica comercial y operativa.</li>
+          </ul>
+          <a class="opento-btn" href="mailto:alfredobeltran98@hotmail.com">Hablemos &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="work">
+    <div class="sec-head">
+      <p class="eyebrow">01 / Trabajo</p>
+      <h2>Trabajo que puedes abrir y cuestionar</h2>
+    </div>
+    <a class="feature" href="/es/proyectos/suplementos-upsell.html">
+      <span class="feature-kicker">Priorizador de Oportunidades de Upsell · Suplementos</span>
+      <h3>¿Qué le vendo después?</h3>
+      <p>Reconstrucción funcional sobre datos sintéticos de un dashboard de upsell que fue mío en Power BI. Ordena las cuentas de cada agente por el tamaño de la oportunidad, poniendo precio a la brecha del portafolio contra lo que el cliente realmente gasta al mes. El texto explica las matemáticas, por qué descarté una media móvil exponencial, y qué parte de la lógica sigue siendo heurística de negocio y no una regla probada.</p>
+      <div class="feature-stats">
+        <div class="feature-stat"><b>60%</b><span>de la oportunidad en 5 de 16 cuentas</span></div>
+        <div class="feature-stat"><b>76%</b><span>concentrado en tres productos</span></div>
+        <div class="feature-stat"><b>100%</b><span>del libro ordenado por oportunidad</span></div>
+      </div>
+      <span class="feature-go">Abrir el caso de estudio &rarr;</span>
+    </a>
+    <a class="feature feature-alt" href="/es/proyectos/cotizado-vs-real.html">
+      <span class="feature-kicker">Health Check de Cotizado vs Facturado &middot; Logística</span>
+      <h3>¿Por qué la factura nunca coincide con la cotización?</h3>
+      <p>Un problema que resolví para un cliente de fletes, reconstruido aquí con datos sintéticos. Cotizaban un precio y facturaban otro y no podían explicar la brecha. El join parecía lo difícil y no lo era; el problema real era un ERP que escribía cada carga en cero y rellenaba el valor después. El texto rastrea la brecha a tres causas con nombre y la métrica semanal de salud que construí encima.</p>
+      <div class="feature-stats">
+        <div class="feature-stat"><b>62%</b><span>de cargas facturadas como se cotizaron</span></div>
+        <div class="feature-stat"><b>61%</b><span>del valor de variación a nuestro favor</span></div>
+        <div class="feature-stat"><b>3</b><span>causas, ordenadas por dinero</span></div>
+      </div>
+      <span class="feature-go">Abrir el caso de estudio &rarr;</span>
+    </a>
+    <div class="pending">
+      <div class="pending-card">
+        <span class="pending-num">Proyecto 03</span>
+        <h3>Pipeline de reporteo asistido por LLM</h3>
+        <p>En preparación.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="practice">
+    <div class="sec-head">
+      <p class="eyebrow">02 / Práctica</p>
+      <h2>Los problemas que resuelvo una y otra vez</h2>
+    </div>
+    <div class="cols2">
+      <div class="col">
+        <h3>Arquitectura de fuente de verdad</h3>
+        <p>Un número, una definición. He reconstruido stacks donde tres áreas reportaban tres cifras de ingreso distintas y ninguna coincidía. La solución casi nunca es una mejor gráfica, es decidir qué significa el número e imponerlo río arriba. En la práctica eso significa jubilar los archivos de fin de mes por una capa gobernada y el dashboard que corre sobre ella, refrescado diario o más seguido.</p>
+      </div>
+      <div class="col">
+        <h3>Reporteo que termina en decisión</h3>
+        <p>Un dashboard está terminado cuando alguien puede decir qué va a hacer distinto después de verlo. Llegar ahí suele ser un problema de convencimiento y no de diseño, porque lo difícil no es construir el número, es lograr que una sala actúe sobre él. Diseño de la decisión hacia atrás y luego lo defiendo.</p>
+      </div>
+      <div class="col">
+        <h3>Análisis comercial y operativo</h3>
+        <p>Precio, inventario, upsell, cadena de suministro. El análisis aterriza porque estuve del lado operativo y sé qué restricciones son reales y cuáles son costumbre.</p>
+      </div>
+      <div class="col">
+        <h3>Probar lo que damos por hecho</h3>
+        <p>Casi toda la analítica se detiene en la correlación y la archiva como hallazgo. El lift te dice que dos productos se compran juntos, no que recomendar uno cause la venta del otro. Las preguntas que valen la pena son las que resuelve un experimento diseñado y no una discusión, y hacia allá llevo mi práctica y la maestría.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head">
+      <p class="eyebrow">03 / Experiencia</p>
+      <h2>Operaciones, comercial y analítica</h2>
+    </div>
+    <div class="job">
+      <div class="job-meta"><b>CargoSprint</b>2026 — actual</div>
+      <div><h3>Data Analyst</h3><p>Analista líder de la operación de finanzas. Lideré la migración desde Tableau, reconstruyendo y rearquitectando el suite de datos de dirección para eliminar reportes redundantes y reconciliar métricas inconsistentes. Arquitecté la fuente de verdad en SQL para 50+ usuarios y construí la capa de Power BI que corre encima, cambiando los archivos de Excel de fin de mes por un dashboard que la operación refresca diario o más seguido. Actualmente construyo pipelines asistidos por IA para análisis recurrente.</p></div>
+    </div>
+    <div class="job">
+      <div class="job-meta"><b>NTD Software</b>2025</div>
+      <div><h3>Business Intelligence Engineer</h3><p>Análisis de logística con Python y SQL, más dashboards de Power BI con métricas de multistop y otras generadoras de ingreso. Construí la reconciliación que compara el precio cotizado contra lo que finalmente se le facturó al cliente, que solo funcionó una vez que aislé la fila correcta por factura a nivel minuto, porque el ERP escribía cada carga en cero y rellenaba el valor real después. Rastreó la brecha de margen a tres causas, de mayor a menor: un servicio de liftgate que la cuenta traía por default, accesoriales que solo aparecían en la entrega como zona residencial y horario extendido, y peso declarado que no correspondía a la carga. Lo convertí en un health check con el porcentaje de cargas con cualquier variación entre cotizado y real, cada una categorizada por causa, para que la operación pudiera demostrar qué variaciones venían del cliente cuando alguien reclamaba una factura.</p></div>
+    </div>
+    <div class="job">
+      <div class="job-meta"><b>Birdman</b>2024 — 2025</div>
+      <div><h3>Data Analyst, CPFR</h3><p>Único analista de toda la operación de brick-and-mortar. Subí 48% las órdenes de compra de distribuidores después de entregar un análisis de elasticidad para planeación de suministro. Automaticé el procesamiento de datos de outsell en Python, convirtiendo un esfuerzo manual de tres días en una hora. Construí los dashboards de Power BI que dirección usaba para definir estrategia de ventas, incluido el ranking de upsell de arriba.</p></div>
+    </div>
+    <div class="job">
+      <div class="job-meta"><b>HPE</b>2024</div>
+      <div><h3>Account Manager</h3><p>Cuentas de nube empresarial. Renovaciones de contrato, optimización y oportunidades de expansión, del lado comercial de productos técnicos.</p></div>
+    </div>
+    <div class="job">
+      <div class="job-meta"><b>GEODIS SCO</b>2021 — 2024</div>
+      <div><h3>CSR, operación Canadá</h3><p>Líder del equipo de la operación de Canadá, cuatro personas. Resolví restricciones de cadena de suministro con análisis de datos, revisión de KPIs y optimización de procesos. Usé datos transaccionales para resolver disputas de atribución de culpa, cambiando cómo la operación defendía su propio desempeño.</p></div>
+    </div>
+    <div class="job">
+      <div class="job-meta"><b>ITESM</b>2020 — 2021</div>
+      <div><h3>Business Specialist</h3><p>Investigación y planeación de cursos para las licenciaturas de la escuela de negocios.</p></div>
+    </div>
+    <div class="job">
+      <div class="job-meta"><b>HP</b>2019 — 2020</div>
+      <div><h3>Operations Specialist</h3><p>Resolución de casos para clientes de Norte y Sudamérica. SAP avanzado de forma constante.</p></div>
+    </div>
+  </section>
+
+  <section id="background">
+    <div class="sec-head">
+      <p class="eyebrow">04 / Formación</p>
+      <h2>Estudios y credenciales</h2>
+    </div>
+    <div class="cols2">
+      <div class="stack">
+        <h3>Educación</h3>
+        <ul>
+          <li><b>M.Sc. en Inteligencia Artificial</b>Tecnológico de Monterrey · 2025 – 2027</li>
+          <li><b>Lic. en Negocios Internacionales</b>Tecnológico de Monterrey · 2016 – 2020</li>
+        </ul>
+      </div>
+      <div class="stack">
+        <h3>Certificaciones</h3>
+        <ul>
+          <li><b>Enterprise Data Science in Practice</b>Analítica con impacto en la toma de decisiones · 2025</li>
+          <li><b>Google Data Analytics Specialization</b>Excel, Python y SQL · 2023</li>
+        </ul>
+      </div>
+      <div class="stack">
+        <h3>Dominios</h3>
+        <ul>
+          <li><b>Operación financiera</b>Ingreso, reporteo y suites de dirección</li>
+          <li><b>Cadena de suministro e inventario</b>Restricciones, revisión de KPIs, optimización</li>
+          <li><b>Comercial y ventas</b>Precio, upsell, estrategia de cuenta</li>
+        </ul>
+      </div>
+      <div class="stack">
+        <h3>Idiomas</h3>
+        <ul>
+          <li><b>Español</b>Nativo</li>
+          <li><b>Inglés</b>Fluido</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <a class="cv-link" href="/alfredo-beltran-cv.pdf" target="_blank" rel="noopener">Descargar CV</a>
+    <p>Radicado en México. Abierto a trabajo remoto y a reubicación.</p>
+    <p><a href="mailto:alfredobeltran98@hotmail.com">alfredobeltran98@hotmail.com</a></p>
+  </footer>
+
+</div>
+</body>
+</html>

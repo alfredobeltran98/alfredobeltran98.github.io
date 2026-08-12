@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alfredo Beltrán &middot; BI &amp; Data Architecture</title>
+<meta name="description" content="BI and data architecture. I build the source of truth and the reporting layer that commercial and finance teams decide with.">
+<link rel="alternate" hreflang="es" href="/es/index.html">
+<link rel="alternate" hreflang="en" href="/index.html">
+<meta property="og:title" content="Alfredo Beltrán &middot; BI &amp; Data Architecture">
+<meta property="og:description" content="BI and data architecture. I build the source of truth and the reporting layer that commercial and finance teams decide with.">
+<meta property="og:type" content="profile">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Serif:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --panel-bg: #14171A;
+    --panel-ink: #F2F3ED;
+    --bg: #EAECDF;
+    --surface: #FAFAF4;
+    --surface-alt: #E1E3D3;
+    --ink: #1C1F14;
+    --ink-muted: #5D6250;
+    --ink-faint: #676D55;
+    --line: #D1D6C2;
+    --covered: #263AA8;
+    --covered-bright: #6E82F5;
+    --covered-soft: #E7E9F6;
+    --opportunity: #C4351C;
+    --opportunity-soft: #FBEAE4;
+    --trend-up: #3C7A54;
+    --trend-down: #C4351C;
+    --trend-flat: #767D64;
+    --radius-card: 12px;
+    --radius-sharp: 2px;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+    --font-name: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+  }
+
+  html { scrollbar-color: #B4BAA0 var(--bg); scrollbar-width: thin; }
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #B4BAA0; border-radius: 8px; border: 3px solid var(--bg); background-clip: padding-box; }
+  ::-webkit-scrollbar-thumb:hover { background: #8E9578; background-clip: padding-box; }
+
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body);
+         font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  .wrap { max-width:1180px; margin:0 auto; padding:34px 32px 48px; }
+
+  .topbar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+    gap:14px 28px; padding-bottom:16px; border-bottom:1px solid var(--line); margin-bottom:52px; }
+  .topnav { display:flex; flex-wrap:wrap; gap:22px; }
+  .topnav a { font-family:var(--font-mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-faint); padding-bottom:2px; border-bottom:1px solid transparent; transition:.15s; }
+  .topnav a:hover { color:var(--ink); border-bottom-color:var(--ink); }
+  .topmeta { display:flex; flex-wrap:wrap; align-items:center; gap:16px; font-size:13px; }
+  .topmeta a { color:var(--ink-muted); border-bottom:1px solid transparent; transition:.15s; }
+  .topmeta a:hover { color:var(--covered); border-bottom-color:var(--covered); }
+  .topmeta a.lang-switch { font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    padding:5px 11px; border:1px solid var(--line); border-radius:20px; color:var(--ink-muted); }
+  .topmeta a.lang-switch:hover { border-color:var(--covered); color:var(--covered); }
+
+  .intro { display:grid; grid-template-columns:150px 1fr; gap:32px; align-items:center; margin-bottom:52px; }
+  .intro img { width:150px; height:150px; border-radius:50%; object-fit:cover; border:1px solid var(--line); }
+  .intro h1 { font-family:var(--font-name); font-weight:600; font-variant-ligatures:none;
+    font-size:clamp(30px,4.2vw,46px); line-height:1.04; letter-spacing:-.018em; margin:0 0 10px; }
+  .tagline { font-family:var(--font-mono); font-size:12.5px; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--opportunity); margin:0 0 20px; }
+  .pitch { font-size:18.5px; line-height:1.48; color:var(--ink); margin:0 0 12px; max-width:62ch; font-weight:500; }
+  .pitch-sub { font-size:16px; line-height:1.55; color:var(--ink-muted); margin:0 0 24px; max-width:64ch; }
+  .cta-row { display:flex; flex-wrap:wrap; gap:14px 18px; align-items:center; }
+  .btn { display:inline-block; font-family:var(--font-mono); font-size:12px; letter-spacing:.06em;
+    text-transform:uppercase; padding:12px 20px; border-radius:20px; background:var(--ink); color:var(--bg);
+    transition:background .15s ease; }
+  .btn:hover { background:var(--opportunity); }
+  .cta-note { font-size:13px; color:var(--ink-faint); line-height:1.5; max-width:52ch; }
+
+  .band { padding-top:0; margin-bottom:46px; }
+  .sub { font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink); margin:0 0 18px; padding-bottom:10px; border-bottom:2px solid var(--ink); }
+
+  .snap { display:grid; grid-template-columns:repeat(3,1fr); gap:26px 36px; }
+  .snap-item { border-left:2px solid var(--line); padding-left:16px; }
+  .snap-k { display:block; font-family:var(--font-mono); font-size:10.5px; font-weight:600; letter-spacing:.13em;
+    text-transform:uppercase; color:var(--ink-faint); margin-bottom:7px; }
+  .snap-item b { display:block; font-size:15.5px; line-height:1.35; font-weight:600; margin-bottom:3px; }
+  .snap-item span { display:block; font-size:13px; line-height:1.5; color:var(--ink-muted); }
+  .snap-item ul { margin:6px 0 0; padding:0; list-style:none; }
+  .snap-item li { font-size:13px; line-height:1.5; color:var(--ink-muted); padding-left:13px;
+    position:relative; margin-bottom:6px; }
+  .snap-item li:last-child { margin-bottom:0; }
+  .snap-item li::before { content:''; position:absolute; left:0; top:8px; width:5px; height:5px;
+    border-radius:50%; background:var(--ink-faint); }
+  .snap-edu { display:block; margin-top:9px; }
+  .snap-edu:first-of-type { margin-top:0; }
+  .snap-edu b { display:block; font-size:14px; font-weight:600; line-height:1.35; }
+  .snap-edu span { display:block; font-size:12.5px; color:var(--ink-muted); }
+  .capabilities { display:grid; grid-template-columns:1fr 1fr; gap:28px 40px; align-items:start; }
+
+  .feature { background:var(--panel-bg); color:var(--panel-ink); border-radius:var(--radius-card);
+    padding:28px 30px; display:block; transition:transform .18s ease; margin-bottom:18px; }
+  .feature:hover { transform:translateY(-2px); }
+  .feature-kicker { font-family:var(--font-mono); font-size:10.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase;
+    color:#E8A08C; display:block; margin-bottom:11px; }
+  .feature h3 { font-family:var(--font-name); font-weight:600; font-variant-ligatures:none;
+    font-size:clamp(20px,2.6vw,26px); margin:0 0 11px; letter-spacing:-.01em; }
+  .feature p { font-size:14px; line-height:1.6; color:#C3C8B6; margin:0 0 18px; max-width:66ch; }
+  .feature-stats { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid #33372B; padding-top:16px; }
+  .feature-stat { padding:0 22px; border-right:1px solid #33372B; }
+  .feature-stat:first-child { padding-left:0; }
+  .feature-stat:last-child { border-right:none; padding-right:0; }
+  .feature-stat b { font-family:var(--font-mono); font-size:16px; display:block; color:var(--panel-ink); }
+  .feature-stat span { font-size:10.5px; color:#9AA08C; text-transform:uppercase; letter-spacing:.05em; }
+  .feature-go { display:inline-block; margin-top:18px; font-family:var(--font-mono); font-size:12px;
+    letter-spacing:.06em; color:#E8A08C; border-bottom:1px solid #7A4034; padding-bottom:2px; }
+
+  .tags { display:flex; flex-wrap:wrap; gap:8px; }
+  .tag { font-family:var(--font-mono); font-size:11.5px; padding:6px 12px; border:1px solid var(--line);
+    border-radius:20px; color:var(--ink-muted); background:var(--surface); }
+
+  .more { display:block; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
+    padding:20px 24px; margin-bottom:52px; transition:border-color .15s ease; }
+  .more:hover { border-color:var(--ink); }
+  .more b { display:block; font-family:var(--font-name); font-size:17px; font-weight:600;
+    font-variant-ligatures:none; margin-bottom:4px; }
+  .more span { font-size:13.5px; color:var(--ink-muted); }
+
+  .foot { border-top:1px solid var(--line); padding-top:24px; display:flex; flex-wrap:wrap;
+    gap:14px 26px; align-items:center; font-size:13.5px; color:var(--ink-muted); }
+  .foot a { color:var(--ink-muted); border-bottom:1px solid var(--line); }
+  .foot a:hover { color:var(--covered); border-bottom-color:var(--covered); }
+
+  @media (max-width:880px) {
+    .wrap { padding:24px 20px 40px; }
+    .intro { grid-template-columns:1fr; gap:22px; }
+    .intro img { width:110px; height:110px; }
+    .snap, .capabilities { grid-template-columns:1fr; gap:20px; }
+    .feature { padding:22px 20px; }
+    .feature-stats { grid-template-columns:1fr; gap:12px; }
+    .feature-stat { padding:0; border-right:none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <nav class="topnav" aria-label="Sections">
+      <a href="/profile.html">Full profile</a>
+    </nav>
+    <nav class="topmeta" aria-label="Contact">
+      <a class="lang-switch" href="/es/index.html" hreflang="es" lang="es">Español</a>
+      <a href="https://www.linkedin.com/in/jesusalfredobeltran/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="mailto:alfredobeltran98@hotmail.com">alfredobeltran98@hotmail.com</a>
+    </nav>
+  </div>
+
+  <header class="intro">
+    <img src="/assets/portrait.jpg" alt="Alfredo Beltr&aacute;n" width="150" height="150">
+    <div>
+      <h1>Alfredo Beltr&aacute;n</h1>
+      <p class="tagline">BI &amp; Data Architecture &middot; M.Sc. Artificial Intelligence</p>
+      <p class="pitch">I work in the space between strategy, analytics and the operation itself, building the data architecture that lets teams of any size decide with evidence rather than instinct.</p>
+      <p class="pitch-sub">Solving business problems and finding the revenue that only shows up once the data is read properly.</p>
+      <div class="cta-row">
+        <a class="btn" href="mailto:alfredobeltran98@hotmail.com">Let’s talk &rarr;</a>
+        <span class="cta-note">Data Analyst at CargoSprint &middot; M.Sc. Artificial Intelligence, Tec de Monterrey &middot; Open to roles and consulting, remote or with relocation.</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="band">
+    <p class="sub">At a glance</p>
+    <div class="snap">
+      <div class="snap-item"><span class="snap-k">Now</span><b>Data Analyst, CargoSprint</b><ul><li>Architected the main source of truth and the reporting running on it</li><li>Built an executive dashboard suite to surface revenue opportunities and flag downsell and churn</li><li>Leveraged AI to automate recurring workflows such as data recaps</li></ul></div>
+      <div class="snap-item"><span class="snap-k">How I work</span><ul><li>Turn a business need into a requirement and an action plan, through analytics</li><li>Build the model along with the strategy it is meant to serve</li><li>Stay on the project past delivery, working across teams to execute and review what the insight called for</li></ul></div>
+      <div class="snap-item"><span class="snap-k">Education</span><span class="snap-edu"><b>M.Sc. Artificial Intelligence</b><span>Tecnol&oacute;gico de Monterrey &middot; 2025 &ndash; 2027</span></span><span class="snap-edu"><b>BA International Business</b><span>Tecnol&oacute;gico de Monterrey &middot; 2016 &ndash; 2020</span></span></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="capabilities">
+      <div>
+        <p class="sub">Stack and tools</p>
+        <div class="tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">SQL</span>
+          <span class="tag">SAP / S4 HANA</span>
+          <span class="tag">Excel</span>
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Statistics</span>
+          <span class="tag">A/B testing</span>
+          <span class="tag">Data visualization</span>
+          <span class="tag">Power Query</span>
+          <span class="tag">DAX</span>
+          <span class="tag">Git</span>
+        </div>
+      </div>
+      <div>
+        <p class="sub">Industries</p>
+        <div class="tags">
+          <span class="tag">Logistics &amp; freight</span>
+          <span class="tag">Supply chain</span>
+          <span class="tag">Consulting</span>
+          <span class="tag">Consumer goods &amp; retail</span>
+          <span class="tag">Enterprise technology</span>
+          <span class="tag">Finance operations</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <p class="sub">Selected work</p>
+    <a class="feature" href="/projects/supplements-upsell.html">
+      <span class="feature-kicker">Upsell Opportunity Ranker · Supplements</span>
+      <h3>What do I sell them next?</h3>
+      <p>A live rebuild on synthetic data of an upsell dashboard I owned in Power BI. It ranks each rep’s accounts by the size of the opening, pricing the gap in a client’s portfolio against what they actually spend in a month. The write-up covers the maths, why I rejected an exponentially weighted average, and which part of the logic is still a business heuristic rather than a tested rule.</p>
+      <div class="feature-stats">
+        <div class="feature-stat"><b>60%</b><span>of the opportunity sits in 5 of 16 accounts</span></div>
+        <div class="feature-stat"><b>76%</b><span>carried by three products</span></div>
+        <div class="feature-stat"><b>100%</b><span>of the book ranked by opportunity</span></div>
+      </div>
+      <span class="feature-go">Open the case study &rarr;</span>
+    </a>
+    <a class="feature" href="/projects/quote-to-actual.html">
+      <span class="feature-kicker">Quote-to-Actual Health Check &middot; Freight</span>
+      <h3>Why does the invoice never match the quote?</h3>
+      <p>A problem I solved for a freight client, rebuilt here on synthetic data. They quoted one price and billed another and could not explain the gap. The join looked like the hard part and was not; the real problem was an ERP that wrote every load at zero and backfilled the value later. The write-up traces the margin gap to three named causes and the weekly health metric I built on top.</p>
+      <div class="feature-stats">
+        <div class="feature-stat"><b>62%</b><span>of loads billed exactly as quoted</span></div>
+        <div class="feature-stat"><b>61%</b><span>of variance value in our favour</span></div>
+        <div class="feature-stat"><b>3</b><span>causes, ranked by money</span></div>
+      </div>
+      <span class="feature-go">Open the case study &rarr;</span>
+    </a>
+  </section>
+
+  <a class="more" href="/profile.html">
+    <b>The full profile &rarr;</b>
+    <span>Experience, education, how I work, and the problems I keep solving.</span>
+  </a>
+
+  <footer class="foot">
+    <a class="btn" href="/alfredo-beltran-cv.pdf" target="_blank" rel="noopener"
+       style="background:transparent;color:var(--ink);border:1px solid var(--ink)">Download CV</a>
+    <span>Based in Mexico. Open to remote work and relocation.</span>
+    <a href="mailto:alfredobeltran98@hotmail.com">alfredobeltran98@hotmail.com</a>
+  </footer>
+
+</div>
+</body>
+</html>
