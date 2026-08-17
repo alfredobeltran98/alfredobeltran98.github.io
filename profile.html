@@ -340,7 +340,7 @@
     <a class="feature" href="/projects/supplements-upsell.html">
       <span class="feature-kicker">Upsell Opportunity Ranker · Supplements</span>
       <h3>What do I sell them next?</h3>
-      <p>A live rebuild on synthetic data of an upsell dashboard I owned in Power BI. It ranks each rep’s accounts by the size of the opening, pricing the gap in a client’s portfolio against what they actually spend in a month. The write-up covers the maths, why I rejected an exponentially weighted average, and which part of the logic is still a business heuristic rather than a tested rule.</p>
+      <p>A live rebuild on synthetic data of an upsell dashboard I owned in Power BI. It ranks each rep’s accounts by what the opening is worth, pricing the portfolio gap against what a client actually spends in a month. The write-up covers the maths and the parts I would still argue with.</p>
       <div class="feature-stats">
         <div class="feature-stat"><b>60%</b><span>of the opportunity sits in 5 of 16 accounts</span></div>
         <div class="feature-stat"><b>76%</b><span>carried by three products</span></div>
@@ -351,7 +351,7 @@
     <a class="feature feature-alt" href="/projects/quote-to-actual.html">
       <span class="feature-kicker">Quote-to-Actual Health Check &middot; Freight</span>
       <h3>Why does the invoice never match the quote?</h3>
-      <p>A problem I solved for a freight client, rebuilt here on synthetic data. They quoted one price and billed another and could not explain the gap. The join looked like the hard part and was not; the real problem was an ERP that wrote every load at zero and backfilled the value later. The write-up traces the margin gap to three named causes and the weekly health metric I built on top.</p>
+      <p>A problem I solved for a freight client, rebuilt here on synthetic data. They quoted one price and billed another and could not explain the gap. The write-up traces it to three named causes, ranked by value, and the weekly health metric I built on top.</p>
       <div class="feature-stats">
         <div class="feature-stat"><b>62%</b><span>of loads billed exactly as quoted</span></div>
         <div class="feature-stat"><b>61%</b><span>of variance value in our favour</span></div>
@@ -393,11 +393,11 @@
     </div>
     <div class="job">
       <div class="job-meta"><b>CargoSprint</b>2026 — present</div>
-      <div><h3>Data Analyst</h3><p>Lead analyst for the finance operation. Led the migration off Tableau, rebuilding and rearchitecting the executive leadership data suite to strip out redundant reports and reconcile inconsistent metrics. Architected the SQL source of truth for 50+ users and built the Power BI layer running on top of it, replacing month-end Excel extracts with a dashboard the operation refreshes daily or faster. Currently building AI-assisted pipelines for recurring analysis.</p></div>
+      <div><h3>Data Analyst</h3><p>Lead analyst for the finance operation. Led the migration off Tableau and rebuilt the executive leadership data suite. Architected the SQL source of truth for 50+ users and the Power BI layer on top of it, replacing month-end extracts with a dashboard refreshed daily. Building AI-assisted pipelines for recurring analysis.</p></div>
     </div>
     <div class="job">
       <div class="job-meta"><b>NTD Software</b>2025</div>
-      <div><h3>Business Intelligence Engineer</h3><p>Logistics analysis in Python and SQL, plus Power BI dashboards covering multistop and other revenue-generating metrics. Built the reconciliation comparing quoted prices against what clients were actually billed, which only worked once I isolated the right row per invoice at minute-level granularity, since the ERP wrote each load at zero and backfilled the real value afterwards. It traced the margin gap to three causes, largest first: a liftgate service sitting on the account by default, accessorials that only surfaced at delivery such as residential and after-hours, and declared weight that did not match the load. I turned it into a health check reporting the share of loads carrying any quote-to-actual variance, each categorised by cause, so the operation could show which variances were customer-driven when an invoice was challenged.</p></div>
+      <div><h3>Business Intelligence Engineer</h3><p>Logistics analysis in Python and SQL, plus Power BI dashboards covering multistop and other revenue-generating metrics. Built quote-to-cash reconciliation and margin-variance reporting, turning pricing discrepancies into a categorised weekly metric.</p></div>
     </div>
     <div class="job">
       <div class="job-meta"><b>Birdman</b>2024 — 2025</div>
