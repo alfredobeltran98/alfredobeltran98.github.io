@@ -213,17 +213,6 @@
     letter-spacing: 0.06em; color: #E8A08C; border-bottom: 1px solid #7A4034; padding-bottom: 2px;
   }
 
-  .pending { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
-  .pending-card { border: 1px dashed var(--line); border-radius: var(--radius-card); padding: 24px 26px; }
-  .pending-num {
-    font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase;
-    color: var(--ink-faint); display: block; margin-bottom: 10px;
-  }
-  .pending-card h3 {
-    font-family: var(--font-name); font-weight: 600; font-variant-ligatures: none;
-    font-size: 18px; margin: 0 0 8px; color: var(--ink-muted); letter-spacing: -0.008em;
-  }
-  .pending-card p { font-size: 13.5px; line-height: 1.55; color: var(--ink-faint); margin: 0; }
 
   .job { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid var(--line); }
   .job:last-of-type { border-bottom: 1px solid var(--line); }
@@ -255,7 +244,7 @@
 
   @media (max-width: 880px) {
     .wrap { padding: 24px 20px 40px; }
-    .hero-split, .cols3, .cols2, .pending { grid-template-columns: 1fr; gap: 26px; }
+    .hero-split, .cols3, .cols2 { grid-template-columns: 1fr; gap: 26px; }
     .stats { grid-template-columns: 1fr; }
     .shift-pair { grid-template-columns: 1fr; gap: 2px; }
     .shift-arrow { text-align: left; }
@@ -327,9 +316,9 @@
       <div>
         <aside class="sidecard">
           <p class="sidecard-label">In short</p>
-          <p><b>Currently</b> Data Analyst at CargoSprint, leading the reporting for the finance operation.</p>
-          <p><b>Background</b> International business, supply chain, enterprise accounts and analytics. Deep enough in the data to build it, fluent enough in the business to know what to build.</p>
-          <p><b>Studying</b> M.Sc. Artificial Intelligence at Tec de Monterrey, 2025 to 2027.</p>
+          <p><b>Currently:</b> Data Analyst at CargoSprint, leading the reporting for the finance operation.</p>
+          <p><b>Background:</b> International business, supply chain, enterprise accounts and analytics. Deep enough in the data to build it, fluent enough in the business to know what to build.</p>
+          <p><b>Studying:</b> M.Sc. Artificial Intelligence at Tec de Monterrey, 2025 to 2027.</p>
         </aside>
         <div class="opento">
           <p class="opento-label">Open to</p>
@@ -370,13 +359,6 @@
       </div>
       <span class="feature-go">Open the case study &rarr;</span>
     </a>
-    <div class="pending">
-      <div class="pending-card">
-        <span class="pending-num">Project 03</span>
-        <h3>LLM-assisted reporting pipeline</h3>
-        <p>In preparation.</p>
-      </div>
-    </div>
   </section>
 
   <section id="practice">
